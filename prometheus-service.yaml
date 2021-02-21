@@ -4,14 +4,15 @@ metadata:
   name: prometheus-service
   namespace: monitoring
   annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port:   '9090'
+      # prometheus.io/scrape: 'true'
+      # prometheus.io/port:   '9090'
+      service.beta.kubernetes.io/aws-load-balancer-internal: "true"
   
 spec:
   selector: 
     app: prometheus-server
-  type: NodePort  
+  type: LoadBalancer 
   ports:
-    - port: 8080
+    - port: 9090
       targetPort: 9090 
       nodePort: 30000
